@@ -1,0 +1,31 @@
+1. What are the general programming practices that are important with respect to 
+performance in java?
+
+First and foremost- no premature optimizations. Any optimization decision should be
+based on number of past experience. In Donald knuths paper - Progamming waste 
+enormous amounts of time thinking about or worrying about, the speed of non critical
+parts of their programs, and these attempts at efficiency actually have a strong impact
+when debugging and maintenance are considered. We should forget about small optimizations
+is the root of all evil. Yet we should not pass up on opportunities in that critical  3%
+
+Minimize number of objects crated :
+  Avoid String concatenation: Use StringBuffer.
+  Aviud creatubg object in Loops,
+  Consider pattern like flyweight
+  
+Use correct data structures :
+  Use the right collections for a situation
+  Use a proper domian model.
+  
+Reducwe web aplication overhead
+  small session size.
+  Use cacahing where appropriate.
+  Close connections and strems.
+  
+Tuen you database:
+  Have indexex.
+  Tune your queries
+  If you are using hibernate, understand the intenral of hibernate
+  Avoid     N+1 selects peroblem
+  Enable statistics on Database.
+  
