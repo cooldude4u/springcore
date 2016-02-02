@@ -29,3 +29,29 @@ Tuen you database:
   Avoid     N+1 selects peroblem
   Enable statistics on Database.
   
+What are the best practices in load and performance testing?
+
+Following are the best practices in terms of load and performance testing.
+
+Have clear perforamnce objectives. That's the single most important objecgtiv.
+Decide peak Load, Expected Response time. Avaliability required before hand.
+
+An aplication does not work on its own. It connects with a number of external interfaces
+A load testing enviromnet should be the same as your production env. We will discuss the 
+exact factors involved later in this article.
+
+Validation : Do performace testing as early as possible.
+
+Make it a regular practie to use profilers in developments environment ex jprofiler
+
+Make suer team is not making premature optimizations, Any optimization decision should
+be based on number of past experiences.
+
+Have a clear strategy on how to handle expected load. What would be the inital settings
+on the application server? Do you plan to use a clustered environment? Do you need a
+load balancer?
+
+
+  
+  
+  
