@@ -65,7 +65,30 @@ In case you want to integrate with Framework like AspectJ.
   Transaction management using Spring AOP 
 
 
-5.
+5. What is the simplest way of ensuring that we are using single version of all Spring related dependencies?
+6. What are the major features in different versions of Spring ?
+7. What are the latest specifications supported by Spring 4.0?
+8. Can you describe some of the new features in Spring 4.0?
+9. What is auto-wiring?
+10. What would happen in Spring Container finds multiple bean definitions matching the property to be auto wired?
+11. How is Spring’s singleton bean different from Gang of Four Singleton Pattern?
+12. How do you represent stateful bean in Spring?
+13. How do you use values defined in a property file in an application context xml?
+14. How is validation done using Spring Framework?
+15. How do you implement cross cutting concerns in a web application?
+16. What is an Aspect and Pointcut in AOP?
+17. What are the different types of AOP advices?
+18. How do you define transaction management for Spring – Hibernate integration?
+19. How do you choose the framework to implement AOP - Spring AOP or AspectJ?
+20. What are the different mock objects provided by Spring test framework?
+21. What are the utility methods available to test JDBC classes?
+22. How do you setup a Session Factory to integrate Spring and Hibernate?
+23. How do you implement caching with Spring framework?
+24. What are the important features of Spring Batch?
+25. What are the important concepts related to setting up a Job in Spring Batch?
+26. What are the different ItemReader and ItemWriter implementations available with Spring Batch?
+27. How do you start running a Spring Batch Job?
+28. How do you configure parallel execution of steps with Spring Batch?
 
 
 
