@@ -1,12 +1,72 @@
 spring core interview questions.
-What are the types of Dependency Injection Spring supports?
 
-Setter-based DI is realized by calling setter method on your beans after invoking a non
-argument constructior or no-argument static factory method to instantitate your bean.
 
-Constructor Injection:
+1. What is Dependency Injection?
 
-Constructor based DI is realized by invoking a construcgtor with a number of arguemtns, each representing collaborator.
+Most java classes are dependent on large number of other classes. For example, a clientservices will
+depend on ClientDAO to get teh data from database. Before Springframework, ClientService class would
+directly crate an instance of ClientDAO class using the code like new ClientDAO() this introduces tight
+coupling between ClientService and CLientDAO. If I want ClientSerivces to use some other data instead 
+of that provided by clientDao we need to reimplments ClientServices.
 
-What is the benefit of spring Framework transaction management?
+This is where Spring framework comes in. It removes tight coupling between classes. In above example.
+Spring framework would inject ClientDAO into clientServices class. This concept is called 
+Dependnecy Injection or Inversion of Control.
+
+If needed( when writing a unit test) we can ask spring framework to inject a different class(when has sae
+interface as ClientDao).
+
+
+2. Why is Spring one of the most popular java related frameworks?
+
+Spring framework enables development of loosely coupled classes based on well defined interfaces(DI, IOC).
+It makes writing testable code sample. Beauty of Spring Framework is that it provides great integration
+support with other non spring open source frameworks- In case you would want to integrate with framework
+like AspectJ instead of SpringAOP or struts Spring framework is built upon loosely couple spring module
+enabling us to pick and choose the specific aspect of the spring module we would like to use.
+This Flexibility is what makes Spring framework one of most popular Java Frameworks.
+
+
+
+3. What are the different moudles in Spring Framework?
+
+The Core package provides
+  IOC
+  Dependency Injection
+BeanFacgtory, an implementation of the factory pattern, helps us decouple configuration and inject of 
+dependencies from program logic.
+
+The DAO package provies an abstraction over JDBC to simplyfy writing code that interacts with DB.
+Declerative transaction managements is an additional feature provided by DAO package.
+
+The ORM package provide intergration for spring with most propular definition of interceptors and pointcuts
+and transaction managments can be implemented using Spring AOP.
+
+Spring Web package provides.
+  Multipart file uploat functionlity
+  Integration with Sturts and other mvc fm
+Spring MVC package provide a clean implementation of the MVC model for web application.
+
+
+4.  Can you give an overview of a webappliction that is implemented using spring related modules?
+
+Different layers of web applicaiton can be implemented using different spring modules. Beauty of Spring
+framework is that spring provides great integration support with other non spring open source frameworkss
+In case you want to integrate with Framework like AspectJ.
+  
+  Core Business logic using simple POJO, manged by spring IOC Container.
+  Spring ORM to integrate with DB
+  Spring JMA to integrate with external interfaces using JMS 
+  SPring WS to consuem web services
+  WebLayer
+    Spring mvc to implements mvc pattern
+    Spring Ws to expose web services.
+    
+  Transaction management using Spring AOP 
+
+
+5.
+
+
+
 
