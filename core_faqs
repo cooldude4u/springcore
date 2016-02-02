@@ -1,1 +1,12 @@
 spring core interview questions.
+What are the types of Dependency Injection Spring supports?
+
+Setter-based DI is realized by calling setter method on your beans after invoking a non
+argument constructior or no-argument static factory method to instantitate your bean.
+
+Constructor Injection:
+
+Constructor based DI is realized by invoking a construcgtor with a number of arguemtns, each representing collaborator.
+
+What is the benefit of spring Framework transaction management?
+
