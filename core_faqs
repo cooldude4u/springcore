@@ -222,10 +222,23 @@ Its an ideal fit if the needs of an application are simple like
   
 
 20. What are the different mock objects provided by Spring test framework?
+org.springframework.mock.env package : mock 
+implementations of the Environment and  PropertySource abstractions.
+
+org.springframework.mock.jndi package: implementation of the JNDI SPI, which can be 
+used to create a simple JNDI environment for test suites.
+
+org.springframework.mock.web.package : Servlet API Mock objecgtts to test Spring MVC
+classes like controller.
 
 
 21. What are the utility methods available to test JDBC classes?
+JdbcTestUtils provides the following static Utility methods.
 
+. countRowsInTable() & deleteFromTables() counts/deletes the rows in the given table.
+. countRowsInTableWhere() & deleteFromTableWherer(); counts/delets the rows in the given table, 
+  using the provided WHERE clause.
+. drop Tables() drops the specified tables.
 
 22. How do you setup a Session Factory to integrate Spring and Hibernate?
 23. How do you implement caching with Spring framework?
