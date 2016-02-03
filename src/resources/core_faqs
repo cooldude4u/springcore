@@ -1,0 +1,253 @@
+spring core interview questions.
+
+
+1. What is Dependency Injection?
+
+Most java classes are dependent on large number of other classes. For example, a clientservices will
+depend on ClientDAO to get teh data from database. Before Springframework, ClientService class would
+directly crate an instance of ClientDAO class using the code like new ClientDAO() this introduces tight
+coupling between ClientService and CLientDAO. If I want ClientSerivces to use some other data instead 
+of that provided by clientDao we need to reimplments ClientServices.
+
+This is where Spring framework comes in. It removes tight coupling between classes. In above example.
+Spring framework would inject ClientDAO into clientServices class. This concept is called 
+Dependnecy Injection or Inversion of Control.
+
+If needed( when writing a unit test) we can ask spring framework to inject a different class(when has sae
+interface as ClientDao).
+
+
+2. Why is Spring one of the most popular java related frameworks?
+
+Spring framework enables development of loosely coupled classes based on well defined interfaces(DI, IOC).
+It makes writing testable code sample. Beauty of Spring Framework is that it provides great integration
+support with other non spring open source frameworks- In case you would want to integrate with framework
+like AspectJ instead of SpringAOP or struts Spring framework is built upon loosely couple spring module
+enabling us to pick and choose the specific aspect of the spring module we would like to use.
+This Flexibility is what makes Spring framework one of most popular Java Frameworks.
+
+
+
+3. What are the different moudles in Spring Framework?
+
+The Core package provides
+  IOC
+  Dependency Injection
+BeanFacgtory, an implementation of the factory pattern, helps us decouple configuration and inject of 
+dependencies from program logic.
+
+The DAO package provies an abstraction over JDBC to simplyfy writing code that interacts with DB.
+Declerative transaction managements is an additional feature provided by DAO package.
+
+The ORM package provide intergration for spring with most propular definition of interceptors and pointcuts
+and transaction managments can be implemented using Spring AOP.
+
+Spring Web package provides.
+  Multipart file uploat functionlity
+  Integration with Sturts and other mvc fm
+Spring MVC package provide a clean implementation of the MVC model for web application.
+
+
+4.  Can you give an overview of a webappliction that is implemented using spring related modules?
+
+Different layers of web applicaiton can be implemented using different spring modules. Beauty of Spring
+framework is that spring provides great integration support with other non spring open source frameworkss
+In case you want to integrate with Framework like AspectJ.
+  
+  Core Business logic using simple POJO, manged by spring IOC Container.
+  Spring ORM to integrate with DB
+  Spring JMA to integrate with external interfaces using JMS 
+  SPring WS to consuem web services
+  WebLayer
+    Spring mvc to implements mvc pattern
+    Spring Ws to expose web services.
+    
+  Transaction management using Spring AOP 
+
+
+5. What is the simplest way of ensuring that we are using single version of all Spring related dependencies?
+  
+  Spring is made up of a number of samll components(Spring core, Spring-context, Spring-app, Spring-beans and so on)
+  One of the tricks of using spring framework is the dependency managements of these components. Simple way of doing
+  this is using Maven "Bill Of Materials" Dependency.
+  
+  <dependencyManagement>
+    <dependencies>
+        <dependency> 
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-framework-bom</artifactId>
+            <version>4.1.6.RELEASE</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+
+
+All Spring dependencies can  now be included in this and the child pom without using version.
+<dependencies>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId> 
+    </dependency>
+    <dependency> 
+        <groupId>org.springframework</groupId> 
+        <artifactId>spring-web</artifactId>
+    </dependency>
+<dependencies>
+
+
+6. What are the major features in different versions of Spring ?
+
+Spring 2.5 made annotation-driven configuration possible.
+Sping 3.0 made grate usid of the java 5 improvements in language
+Spring 4.0 is the first version fully support java 8 features.
+mininum version of java to use Spring 4 is javaSE 6.
+
+7. What are the latest specifications supported by Spring 4.0?
+  
+Spring Framework 4.0 supports the javaEE 7 specification
+  .JMS 2.0
+  .JTA 1.2
+  .JPA 2.1
+  .Bean Validation 1.1
+  .JSR-236 for Concerency.
+  
+8. Can you describe some of the new features in Spring 4.0?
+
+Following are some of the new features in Spirng 4.0 and 4.1
+  . Spring-websoket moudle provides support for WebSocket-based communication in the webapplications.
+  . Spring Framewrok 4.0 is focused on Servelet3.0 environment
+  . @RestController annotation is introduced for use with register JMS listener endepoints.
+  . Sping 4.1 supports Jcache annotation using Spring existing cache configuration.
+  .Jackson’s@JsonViewissupporteddirectlyon@ResponseBodyandResponseEntitycontroller methods for serializing
+  .different amounts of details for the same POJO.
+  
+9. What is auto-wiring?
+The Spring container can autowire dependencies into interacting beans. Spring container can resolve dependencies by 
+looking at the other beans defined in the ApplicationContext. This eliminates the need for maintaining an xml 
+specifiying beans and their dependencies. Autowiring can be done byName(name of the propery) and byType(type of the property) 
+
+10. What would happen in Spring Container finds multiple bean definitions matching the property to be auto wired?
+
+Spring framework does not resolve this kind of ambiguity. It would throw an exception. The programing has the choice to remove 
+one of the bean or explicitly wire in a dependency.
+  
+11. How is Spring’s singleton bean different from Gang of Four Singleton Pattern?
+
+The singeton scope is the defaultScope in Spring. The Gang of Four defines Singleton as having one and only one instance per
+Classloader. However, Spring singleton is defined as one instance of bean definition per container.
+
+12. How do you represent stateful bean in Spring?
+
+Stateful beans are represented in Spring with a prototype scope. A new instance is crated everytime a request for bean is made.
+Example below
+  <bean id="state" class="com.foo.SomeState" scope="prototype" />
+
+13. How do you use values defined in a property file in an application context xml?
+
+Following exmaple shows how to configure a datasource using the url, username and password configure in a property file(database-connection.properties)
+<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="locations" value="classpath:database-connection.properties"/>
+</bean>
+<bean id="dataSource" destroy-method="close" class="org.apache.commons.dbcp.BasicDataSource">
+    <property name="driverClassName" value="${jdbc.driverClassName}"/> 
+    <property name="url" value="${jdbc.url}"/>
+    <property name="username" value="${jdbc.username}"/>
+    <property name="password" value="${jdbc.password}"/>
+</bean>
+
+14. How is validation done using Spring Framework?
+
+Spring validator can be used both in web and business layer to validate objects. Its is based on the 
+org.springframework.validation.Validator interface having two important methods
+.Support(Class)- does this validator support a particular calss.
+
+.validate(Object, org.springframework.validation.Errors)- validates and sets errors into Error
+validates and sets erros into Errors object.
+An example is provided below MessageCOdesResolver can be used to convert the message code into proper internationlized text.
+
+public class CarValidatior implements Validator {
+  public boolean supports(Class clazz) {
+    return Car.class.equals(clazz);
+  }
+  
+  public void validate(Object obj, Errors e) {
+    ValidationUtils.rejectIfEmpty(e, "name", "name.is.empty");
+    Car c = (Car) obj;
+    if(c.getUsedYear() < 0) {
+      e.rejectVlaue("usedYears", "not.yet.bought");
+    }
+  }
+}
+15. How do you implement cross cutting concerns in a web application?
+Functionality spanning multiple layers of an application are called crosscutting concerns. Example are logging, security, declerative transactions.
+Cross cutting are best implemetned using Aspect oriented Programming AOP. AOP use to apply the cross cutting features across multiple classes.
+
+
+16. What is an Aspect and Pointcut in AOP?
+Two important AOP concepts are 
+Aspect : Aspect is the concern that we are tyring to implement genrically. 
+Ex: logging, transaction management . Advice is the specific aspect of the concern we are implementing
+
+PointCut: An expression which determines what are the methods that the Advice should be applied on.
+
+17. What are the different types of AOP advices?
+Before advice : Executed before executing the actual method.
+After retruning advice: Execyted after actual mehtod call method.
+After throwing advice : Executed in all secenarios(exception or not) after actual method call.
+Around advice : Most powerful advice which can perform custome behavior before and after the method invocation.
+
+18. How do you define transaction management for Spring – Hibernate integration?
+
+First step is to define a transaction manager in the xml.
+<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager" 
+ p:sessionFactory-ref="sessionFactory"/>
+ <tx:annotation-driven/>
+
+Next, we can add the @ Transcation annotation on the methods which need to part of transactions.
+@Transactional(readOnly=true)
+public class CustomerDaoImpl implements CustomerDao {
+}
+
+19. How do you choose the framework to implement AOP - Spring AOP or AspectJ?
+
+Spring AOP is very simple implementation of AOP concepts. 
+Its an ideal fit if the needs of an application are simple like 
+  .Simple method execution and/or
+  .Advising the execution of operations only on spring beans
+  AspectJ is a full fledged AOP framework that helps you 
+  .Advise objects  not managed by the spring container.
+  .Advise join points other than simple method executions(for exmaple, field get or set join points)
+  
+
+20. What are the different mock objects provided by Spring test framework?
+org.springframework.mock.env package : mock 
+implementations of the Environment and  PropertySource abstractions.
+
+org.springframework.mock.jndi package: implementation of the JNDI SPI, which can be 
+used to create a simple JNDI environment for test suites.
+
+org.springframework.mock.web.package : Servlet API Mock objecgtts to test Spring MVC
+classes like controller.
+
+
+21. What are the utility methods available to test JDBC classes?
+JdbcTestUtils provides the following static Utility methods.
+
+. countRowsInTable() & deleteFromTables() counts/deletes the rows in the given table.
+. countRowsInTableWhere() & deleteFromTableWherer(); counts/delets the rows in the given table, 
+  using the provided WHERE clause.
+. drop Tables() drops the specified tables.
+
+22. How do you setup a Session Factory to integrate Spring and Hibernate?
+23. How do you implement caching with Spring framework?
+24. What are the important features of Spring Batch?
+25. What are the important concepts related to setting up a Job in Spring Batch?
+26. What are the different ItemReader and ItemWriter implementations available with Spring Batch?
+27. How do you start running a Spring Batch Job?
+28. How do you configure parallel execution of steps with Spring Batch?
+
+
+
+
