@@ -173,16 +173,60 @@ public class CarValidatior implements Validator {
   }
   
   public void validate(Object obj, Errors e) {
-    ValidationUtils
+    ValidationUtils.rejectIfEmpty(e, "name", "name.is.empty");
+    Car c = (Car) obj;
+    if(c.getUsedYear() < 0) {
+      e.rejectVlaue("usedYears", "not.yet.bought");
+    }
   }
 }
 15. How do you implement cross cutting concerns in a web application?
+Functionality spanning multiple layers of an application are called crosscutting concerns. Example are logging, security, declerative transactions.
+Cross cutting are best implemetned using Aspect oriented Programming AOP. AOP use to apply the cross cutting features across multiple classes.
+
+
 16. What is an Aspect and Pointcut in AOP?
+Two important AOP concepts are 
+Aspect : Aspect is the concern that we are tyring to implement genrically. 
+Ex: logging, transaction management . Advice is the specific aspect of the concern we are implementing
+
+PointCut: An expression which determines what are the methods that the Advice should be applied on.
+
 17. What are the different types of AOP advices?
+Before advice : Executed before executing the actual method.
+After retruning advice: Execyted after actual mehtod call method.
+After throwing advice : Executed in all secenarios(exception or not) after actual method call.
+Around advice : Most powerful advice which can perform custome behavior before and after the method invocation.
+
 18. How do you define transaction management for Spring – Hibernate integration?
+
+First step is to define a transaction manager in the xml.
+<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager" 
+ p:sessionFactory-ref="sessionFactory"/>
+ <tx:annotation-driven/>
+
+Next, we can add the @ Transcation annotation on the methods which need to part of transactions.
+@Transactional(readOnly=true)
+public class CustomerDaoImpl implements CustomerDao {
+}
+
 19. How do you choose the framework to implement AOP - Spring AOP or AspectJ?
+
+Spring AOP is very simple implementation of AOP concepts. 
+Its an ideal fit if the needs of an application are simple like 
+  .Simple method execution and/or
+  .Advising the execution of operations only on spring beans
+  AspectJ is a full fledged AOP framework that helps you 
+  .Advise objects  not managed by the spring container.
+  .Advise join points other than simple method executions(for exmaple, field get or set join points)
+  
+
 20. What are the different mock objects provided by Spring test framework?
+
+
 21. What are the utility methods available to test JDBC classes?
+
+
 22. How do you setup a Session Factory to integrate Spring and Hibernate?
 23. How do you implement caching with Spring framework?
 24. What are the important features of Spring Batch?
